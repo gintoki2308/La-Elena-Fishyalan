@@ -1,0 +1,37 @@
+<?php
+require_once __DIR__.'/../../config/config.php';
+if (!isLoggedIn() || !canManageBackOffice()) { header('Location: '.app_url('auth/login.php')); exit; }
+require_once __DIR__.'/../../config/workforce_admin_helper.php';
+$db=(new Database())->connect(); $error=''; $person=null; $data=['items'=>[]]; $shifts=['items'=>[]];
+$totals=['staff'=>0,'active'=>0,'open'=>0];
+$staffId=max(0,(int)($_GET['staff_id']??0)); $search=is_string($_GET['search']??null)?trim($_GET['search']):'';
+try {
+    if (!$db) throw new RuntimeException('The database is unavailable.');
+    workforceReady($db);
+    $totals=$db->query("SELECT COUNT(*) AS staff,COALESCE(SUM(account_status='ACTIVE'),0) AS active,(SELECT COUNT(*) FROM staff_attendance WHERE check_in_time IS NOT NULL AND check_out_time IS NULL) AS open FROM staffs")->fetch();
+    if ($staffId) {
+        // Explicit profile fields keep passwords, OTPs and session tokens out of this view.
+        $query=$db->prepare('SELECT staff_id,first_name,last_name,email,phone,role,account_status,hire_date,display_name,bio,professional_summary,address_street,address_city,address_state,address_zip,emergency_contact_name,emergency_contact_relation,emergency_contact_phone,created_at FROM staffs WHERE staff_id=?');
+        $query->execute([$staffId]); $person=$query->fetch();
+        if (!$person) { http_response_code(404); throw new InvalidArgumentException('Staff member not found.'); }
+        $shifts=workforcePage($db,'sh.*,(SELECT COUNT(*) FROM staff_attendance a WHERE a.shift_id=sh.shift_id) AS recorded_sessions','FROM staff_shifts sh','sh.staff_id=?',[$staffId],'sh.shift_date DESC,sh.start_time DESC',(int)($_GET['page']??1));
+    } else {
+        $where='1=1'; $params=[];
+        if ($search!=='') { $where="CONCAT(COALESCE(s.first_name,''),' ',COALESCE(s.last_name,''),' ',s.email) LIKE ?"; $params[]='%'.$search.'%'; }
+        $data=workforcePage($db,"s.staff_id,s.first_name,s.last_name,s.email,s.role,s.account_status,(SELECT COUNT(*) FROM staff_attendance a WHERE a.staff_id=s.staff_id) AS attendance_count",'FROM staffs s',$where,$params,'s.first_name,s.last_name,s.staff_id',(int)($_GET['page']??1));
+    }
+} catch (Throwable $e) { $error=$e instanceof PDOException?'Staff records could not be loaded. Please try again.':$e->getMessage(); }
+$e='workforceEscape';
+?>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staff Records - Admin</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="../../staffSide/workforce.css"></head>
+<body><nav class="navbar"><div class="container d-flex gap-2 flex-wrap"><a class="navbar-brand" href="../admin-dashboard.php">&larr; Admin Panel</a><div class="d-flex gap-2 flex-wrap"><a class="btn btn-outline-secondary" href="viewAttendance.php">Attendance</a><a class="btn btn-outline-secondary" href="viewPayroll.php">Staff Payroll</a><a class="btn btn-outline-secondary" href="viewSchedule.php">Schedule shifts</a></div></div></nav>
+<main class="container workforce-page"><div class="workforce-heading"><div><p class="eyebrow">EMPLOYEE MANAGEMENT</p><h1><?= $person?$e($person['first_name'].' '.$person['last_name']):'Staff Records' ?></h1><p>Profiles, schedules, and attendance for every staff member.</p></div><?php if ($staffId): ?><a class="btn btn-outline-secondary" href="viewStaffRecords.php">All staff</a><?php endif ?></div>
+<?php if ($error): ?><div class="alert alert-danger" role="alert"><?= $e($error) ?></div><?php endif ?>
+<?php if ($person): ?>
+<section class="session-card"><h2>Employee details</h2><div class="row g-3"><?php foreach (['staff_id'=>'Staff ID','display_name'=>'Display name','email'=>'Email','phone'=>'Phone','role'=>'Role','account_status'=>'Account status','hire_date'=>'Hire date','created_at'=>'Account created','address_street'=>'Street','address_city'=>'City / municipality','address_state'=>'Province / state','address_zip'=>'Postal code','emergency_contact_name'=>'Emergency contact','emergency_contact_relation'=>'Relationship','emergency_contact_phone'=>'Emergency phone'] as $key=>$label): ?><div class="col-md-6"><small><?= $label ?></small><p class="text-break"><strong><?= $e($person[$key]?:'Not provided') ?></strong></p></div><?php endforeach ?></div><p class="workforce-notes">Biography: <?= $e($person['bio']?:'Not provided') ?></p><p class="workforce-notes">Professional summary: <?= $e($person['professional_summary']?:'Not provided') ?></p><div class="d-flex gap-2 flex-wrap"><a class="btn btn-primary" href="viewAttendance.php?staff_id=<?= $staffId ?>">All attendance</a><a class="btn btn-primary" href="viewPayroll.php?staff_id=<?= $staffId ?>">Staff payroll</a><a class="btn btn-outline-secondary" href="../staffManagementCrud/editStaff.php?id=<?= $staffId ?>">Edit staff</a></div></section>
+<section class="session-card"><h2>Complete schedule history</h2><p class="small text-secondary">Includes past and upcoming shifts. A past shift with no sessions has no recorded attendance.</p><div class="table-responsive"><table class="table"><thead><tr><th>Date</th><th>Shift start</th><th>Shift end</th><th>Recorded sessions</th><th>Notes</th></tr></thead><tbody><?php if (!$shifts['items']): ?><tr><td colspan="5">No shifts scheduled.</td></tr><?php endif ?><?php foreach ($shifts['items'] as $shift): ?><tr><td><?= $e($shift['shift_date']) ?></td><td><?= $e($shift['start_time']) ?></td><td><?= $e($shift['end_time']) ?></td><td><a href="viewAttendance.php?staff_id=<?= $staffId ?>&amp;from=<?= $e($shift['shift_date']) ?>&amp;to=<?= $e($shift['shift_date']) ?>"><?= (int)$shift['recorded_sessions'] ?> session(s)</a></td><td class="workforce-notes"><?= $e($shift['notes']?:'—') ?></td></tr><?php endforeach ?></tbody></table></div><?= render_pagination($shifts,'page',[],'viewStaffRecords.php') ?></section>
+<?php elseif (!$staffId): ?>
+<div class="workforce-summary"><div>Total staff<strong><?= (int)$totals['staff'] ?></strong></div><div>Active accounts<strong><?= (int)$totals['active'] ?></strong></div><div>Open attendance sessions<strong><?= (int)$totals['open'] ?></strong><a href="viewAttendance.php?status=INCOMPLETE">Review sessions</a></div></div>
+<form class="session-card" method="get"><label for="search" class="form-label">Search staff name or email</label><div class="d-flex gap-2"><input id="search" name="search" class="form-control" value="<?= $e($search) ?>"><button class="btn btn-primary">Search</button><a href="viewStaffRecords.php" class="btn btn-outline-secondary">Reset</a></div></form>
+<section class="session-card"><h2>All staff</h2><div class="table-responsive"><table class="table"><thead><tr><th>Employee</th><th>Role / status</th><th>Attendance</th><th>Details</th></tr></thead><tbody><?php if (!$data['items']): ?><tr><td colspan="4">No staff found.</td></tr><?php endif ?><?php foreach ($data['items'] as $row): ?><tr><td><?= $e($row['first_name'].' '.$row['last_name']) ?><br><small><?= $e($row['email']) ?></small></td><td><?= $e($row['role']) ?><br><?= $e($row['account_status']) ?></td><td><a href="viewAttendance.php?staff_id=<?= (int)$row['staff_id'] ?>"><?= (int)$row['attendance_count'] ?> sessions</a></td><td><a class="btn btn-sm btn-outline-secondary" href="?staff_id=<?= (int)$row['staff_id'] ?>">View details</a></td></tr><?php endforeach ?></tbody></table></div><?= render_pagination($data,'page',[],'viewStaffRecords.php') ?></section>
+<?php endif ?></main></body></html>

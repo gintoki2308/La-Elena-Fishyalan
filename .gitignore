@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+.vscode/
+.agents/
+.codex/
+.aws/
+node_modules/
+uploads/*
+!uploads/.gitkeep
+images/profiles/**/*
+!images/profiles/**/
+!images/profiles/**/.gitkeep
+/database/backups/

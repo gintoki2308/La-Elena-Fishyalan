@@ -1,0 +1,372 @@
+.workforce-page{max-width:1060px;padding-top:34px;padding-bottom:50px}.workforce-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.workforce-heading h1{font-size:2rem;font-weight:750;letter-spacing:-.04em}.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:#56757a;margin-bottom:8px}.attendance-clock{border-radius:22px;padding:30px;background:linear-gradient(115deg,#174b61,#258b99);color:white;box-shadow:0 12px 35px #174b611c}.attendance-clock>p:first-child{font-size:.8rem;letter-spacing:.06em;font-weight:650}.clock-name{float:right}.clock-digits{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px;font-variant-numeric:tabular-nums}.clock-digits>span{background:#123d50;border:1px solid #ffffff20;box-shadow:0 4px 0 #0b3041;border-radius:10px;font-size:clamp(2rem,7vw,4.8rem);line-height:1.3;padding:0 12px}.clock-digits>span:nth-of-type(3){background:#eff9f6;color:#174b61;box-shadow:0 4px 0 #c4dcde}.clock-digits b{font-size:2rem}.clock-digits small{align-self:end;margin-bottom:10px}.schedule-status{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:23px;margin:20px 0;background:#ffffffb0;border:1px solid #d8e4df;border-radius:16px}.schedule-status span{font-size:.85rem;color:#657a80}.session-card{background:#fffdf8;border:1px solid #dae5df;border-radius:18px;padding:26px;margin-bottom:20px;box-shadow:0 5px 20px #173d4906}.session-card h2{display:flex;align-items:center;gap:15px;font-size:1.12rem;font-weight:700;margin-bottom:22px}.session-tag{font-size:.75rem;padding:10px;border-radius:12px;background:#e1eff4;color:#24657e}.session-tag.pm{background:#dff3ee;color:#297a69}.session-entry+.session-entry{border-top:1px solid #e1e9e5;margin-top:20px;padding-top:20px}.session-actions{display:grid;grid-template-columns:1fr 1fr;gap:18px}.session-actions .btn,.session-actions form{width:100%}.session-actions .btn{border-radius:30px;padding:12px;font-weight:650}.session-actions .btn-primary{background:#227f96;border-color:#227f96}.session-actions .btn:disabled{opacity:.45}.workforce-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}.workforce-summary>div{padding:24px;background:#fffdf8;border:1px solid #d8e4df;border-radius:16px}.workforce-summary strong{display:block;font-size:1.65rem;color:#184c5a;margin-top:6px}.workforce-notes{white-space:pre-wrap}.workforce-page .table{--bs-table-bg:transparent;font-size:.88rem}.workforce-page .table th{white-space:nowrap;color:#526e75}.workforce-page .table td{vertical-align:middle}.print-only{display:none}@media(max-width:600px){.workforce-page{padding-top:22px}.workforce-heading{align-items:flex-start;flex-direction:column}.attendance-clock{padding:24px 16px}.clock-name{float:none;display:block;margin-top:8px}.clock-digits{gap:6px}.clock-digits>span{padding:2px 9px}.clock-digits b{font-size:1.1rem}.session-card{padding:20px 16px}.session-actions{gap:10px}.workforce-summary{grid-template-columns:1fr}.workforce-summary>div{padding:16px}.workforce-page .table{min-width:640px}}@media print{nav,.no-print,.workforce-heading>a{display:none!important}body{background:white!important}.workforce-page{max-width:none}.session-card{box-shadow:none;break-inside:avoid}.print-only{display:block}.table-responsive{overflow:visible}}
+
+.attendance-day { border: 1px solid #d8e4df; border-radius: 12px; overflow: hidden; margin-top: 20px; }
+.attendance-day-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 16px; background: #edf4f2; }
+.attendance-day-heading h3 { margin: 0; color: #184c5a; font-size: 1rem; font-weight: 700; }
+.attendance-day-heading span { font-size: .8rem; color: #526e75; }
+.attendance-day .table { margin-bottom: 0; }
+.attendance-day .table th, .attendance-day .table td { padding: 12px; }
+
+/* Staff attendance layout. */
+.payroll-preview { background: #edf4f2; border-radius: 12px; padding: 18px; }
+.payroll-amounts td { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .workforce-page .payroll-amounts { min-width: 0; } }
+/* Warm cream and terracotta palette, limited to staff attendance. */
+.attendance-page {
+    --attendance-ink: #49332d;
+    --attendance-muted: #796259;
+    --attendance-accent: #ae492f;
+    --attendance-border: #e7d7cb;
+    background: linear-gradient(135deg, #faf5ed 0%, #f5e9dd 55%, #f8eee7 100%) !important;
+    color: var(--attendance-ink) !important;
+}
+.attendance-page .navbar {
+    background: #fffcf7 !important;
+    border-bottom-color: var(--attendance-border) !important;
+    box-shadow: 0 4px 20px #6339230a;
+}
+.attendance-page .navbar-brand,
+.attendance-page h1,
+.attendance-page h2 {
+    color: var(--attendance-ink) !important;
+}
+.attendance-page .eyebrow {
+    color: var(--attendance-accent);
+}
+.attendance-page .text-secondary,
+.attendance-page .schedule-status span {
+    color: var(--attendance-muted) !important;
+}
+.attendance-page .attendance-clock {
+    background: linear-gradient(115deg, #713b2e, #a64b32 65%, #b65b3d);
+    color: #fffaf2;
+}
+.attendance-page .clock-digits > span {
+    background: #542c23;
+    border-color: #ffffff26;
+}
+.attendance-page .clock-digits > span:nth-of-type(3) {
+    background: #fff0d9;
+    color: #713b2e;
+}
+.attendance-page .schedule-status {
+    background: #fff8ee;
+    border-color: var(--attendance-border);
+}
+.attendance-page .session-card {
+    background: #fffdf9;
+    border-color: var(--attendance-border);
+    box-shadow: 0 5px 20px #63392308;
+}
+.attendance-page .session-tag {
+    background: #fae5c4;
+    color: #805015;
+}
+.attendance-page .session-tag.pm {
+    background: #f6e0d6;
+    color: #994329;
+}
+.attendance-page .session-entry + .session-entry {
+    border-top-color: var(--attendance-border);
+}
+.attendance-page .btn-primary {
+    --bs-btn-bg: var(--attendance-accent);
+    --bs-btn-border-color: var(--attendance-accent);
+    --bs-btn-hover-bg: #913923;
+    --bs-btn-hover-border-color: #913923;
+    --bs-btn-active-bg: #78301f;
+    --bs-btn-active-border-color: #78301f;
+    --bs-btn-disabled-bg: #ead9ce;
+    --bs-btn-disabled-border-color: #ead9ce;
+    --bs-btn-disabled-color: #796259;
+    --bs-btn-focus-shadow-rgb: 174, 73, 47;
+}
+.attendance-page .session-actions .btn-primary {
+    background: var(--bs-btn-bg);
+    border-color: var(--bs-btn-border-color);
+}
+.attendance-page .session-actions .btn-primary:hover {
+    background: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+}
+.attendance-page .session-actions .btn-primary:active {
+    background: var(--bs-btn-active-bg);
+    border-color: var(--bs-btn-active-border-color);
+}
+.attendance-page .session-actions .btn-primary:disabled {
+    background: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+}
+.attendance-page .btn-outline-secondary {
+    --bs-btn-color: #80513f;
+    --bs-btn-border-color: #b89886;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #80513f;
+    --bs-btn-hover-border-color: #80513f;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #684132;
+    --bs-btn-active-border-color: #684132;
+    --bs-btn-disabled-color: #796259;
+    --bs-btn-disabled-border-color: #ddcabc;
+    --bs-btn-focus-shadow-rgb: 128, 81, 63;
+}
+.attendance-page .session-actions .btn:disabled {
+    opacity: 1;
+}
+.attendance-page .badge.text-bg-secondary {
+    background: #eee4dc !important;
+    color: #6e574b !important;
+}
+.attendance-page .badge.text-bg-success {
+    background: #e3eedf !important;
+    color: #3b633b !important;
+}
+.attendance-page .badge.text-bg-warning {
+    background: #fae7be !important;
+    color: #7c5418 !important;
+}
+.attendance-page .workforce-page .table {
+    --bs-table-bg: #fffdf9 !important;
+    --bs-table-color: var(--attendance-ink) !important;
+    --bs-table-border-color: var(--attendance-border) !important;
+    --bs-table-hover-bg: #faf0e5 !important;
+    --bs-table-hover-color: var(--attendance-ink) !important;
+    background: #fffdf9 !important;
+}
+.attendance-page .table th {
+    background: #f5e9dc !important;
+    color: #654536 !important;
+    border-color: var(--attendance-border) !important;
+}
+.attendance-page .table td {
+    color: var(--attendance-ink) !important;
+    border-color: var(--attendance-border) !important;
+}
+.attendance-page .table-responsive {
+    border-color: var(--attendance-border);
+}
+.attendance-page {
+    font-size: 20px;
+}
+.attendance-page .navbar {
+    min-height: 71px;
+    padding: 10px 0;
+}
+.attendance-page .navbar > .container {
+    width: 100%;
+    max-width: 1650px;
+    padding-inline: 16px;
+}
+.attendance-page .navbar-brand {
+    font-size: 25px;
+}
+.attendance-page .btn {
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 8px 15px;
+}
+.attendance-page .workforce-page {
+    width: 100%;
+    max-width: 1320px;
+    padding: 44px 12px 64px;
+}
+.attendance-page .workforce-heading {
+    margin-bottom: 36px;
+    gap: 24px;
+}
+.attendance-page .eyebrow {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: .16em;
+    margin-bottom: 10px;
+}
+.attendance-page .workforce-heading h1 {
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+.attendance-page .workforce-heading p:last-child {
+    margin-bottom: 16px;
+}
+.attendance-page .workforce-heading > .btn {
+    flex-shrink: 0;
+}
+.attendance-page .attendance-clock {
+    padding: 37px;
+    border-radius: 28px;
+    box-shadow: 0 15px 44px #713b2e24;
+}
+.attendance-page .attendance-clock > p:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
+}
+.attendance-page .clock-name {
+    float: none;
+    overflow-wrap: anywhere;
+}
+.attendance-page .clock-digits {
+    gap: 15px;
+    margin-top: 32px;
+}
+.attendance-page .clock-digits > span {
+    font-size: 96px;
+    line-height: 1.3;
+    padding: 0 15px;
+    border-radius: 13px;
+    box-shadow: 0 5px 0 #3e2019;
+}
+.attendance-page .clock-digits > span:nth-of-type(3) {
+    box-shadow: 0 5px 0 #dcb995;
+}
+.attendance-page .clock-digits b {
+    font-size: 40px;
+}
+.attendance-page .clock-digits small {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+.attendance-page #clockDate {
+    margin-top: 20px !important;
+}
+.attendance-page .schedule-status {
+    align-items: center;
+    padding: 28px;
+    margin: 25px 0;
+    border-radius: 20px;
+}
+.attendance-page .schedule-status span {
+    font-size: 17px;
+}
+.attendance-page .session-card {
+    padding: 32px;
+    margin-bottom: 25px;
+    border-radius: 23px;
+}
+.attendance-page .session-card h2 {
+    font-size: 22px;
+    gap: 19px;
+    margin-bottom: 28px;
+}
+.attendance-page .session-tag {
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 15px;
+}
+.attendance-page .session-entry + .session-entry {
+    margin-top: 25px;
+    padding-top: 25px;
+}
+.attendance-page .session-entry .badge {
+    align-self: center;
+}
+.attendance-page .session-actions {
+    gap: 22px;
+}
+.attendance-page .session-actions .btn {
+    border-radius: 30px;
+    padding: 15px;
+}
+.attendance-page .workforce-page .table {
+    font-size: 17px;
+}
+.attendance-page a:focus-visible,
+.attendance-page button:focus-visible {
+    outline: 3px solid var(--attendance-accent);
+    outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+    .attendance-page {
+        font-size: 16px;
+    }
+    .attendance-page .navbar {
+        min-height: 64px;
+    }
+    .attendance-page .navbar-brand {
+        font-size: 20px;
+    }
+    .attendance-page .btn {
+        font-size: 16px;
+    }
+    .attendance-page .workforce-page {
+        padding: 28px 16px 40px;
+    }
+    .attendance-page .workforce-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 24px;
+    }
+    .attendance-page .eyebrow {
+        font-size: 11px;
+    }
+    .attendance-page .workforce-heading h1 {
+        font-size: 32px;
+    }
+    .attendance-page .attendance-clock {
+        padding: 24px 16px;
+        border-radius: 22px;
+    }
+    .attendance-page .attendance-clock > p:first-child {
+        font-size: 12px;
+        gap: 4px 16px;
+    }
+    .attendance-page .clock-name {
+        margin: 0;
+    }
+    .attendance-page .clock-digits {
+        gap: 6px;
+        margin-top: 24px;
+    }
+    .attendance-page .clock-digits > span {
+        font-size: clamp(32px, 9vw, 60px);
+        padding: 4px 8px;
+        border-radius: 9px;
+    }
+    .attendance-page .clock-digits b {
+        font-size: 22px;
+    }
+    .attendance-page .clock-digits small {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    .attendance-page .schedule-status {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .attendance-page .schedule-status span {
+        font-size: 14px;
+    }
+    .attendance-page .session-card {
+        padding: 24px 16px;
+        border-radius: 20px;
+    }
+    .attendance-page .session-card h2 {
+        font-size: 19px;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    .attendance-page .session-tag {
+        font-size: 12px;
+        padding: 10px;
+    }
+    .attendance-page .session-actions {
+        gap: 10px;
+    }
+    .attendance-page .session-actions .btn {
+        padding: 12px 8px;
+    }
+    .attendance-page .workforce-page .table {
+        font-size: 14px;
+        min-width: 640px;
+    }
+}

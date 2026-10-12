@@ -1,0 +1,17 @@
+<?php
+if (!function_exists('isAdmin') || !isLoggedIn() || !isAdmin() || !isset($e,$money)) { http_response_code(403); exit; }
+?>
+<?php if ($previewError??''): ?><p class="alert alert-warning mb-0"><?= $e($previewError) ?></p>
+<?php elseif (!$preview): ?><p class="text-secondary mb-0">Enter a salary rate and payroll dates to calculate completed attendance.</p>
+<?php else: $detected=json_decode($preview['attendance_snapshot'],true)?:[]; ?>
+<div class="payroll-preview" role="status"><h3 class="h5">Salary calculated from attendance</h3><strong>Preview net pay: <?= $money($preview['net_pay']) ?></strong><p class="mb-0">Basic salary <?= $money($preview['basic_pay']) ?> + allowances <?= $money($preview['allowances']) ?> &minus; deductions <?= $money($preview['deductions']) ?><br><?= workforceDuration($preview['worked_minutes']) ?> completed across <?= $preview['worked_days'] ?> attended date(s).</p></div>
+<?php if (($preview['open_sessions']??0)>0): ?><p class="alert alert-warning mt-3 mb-0"><?= (int)$preview['open_sessions'] ?> open session(s) excluded. Salary updates after time out. Close these sessions before generating payroll.</p><?php endif ?>
+<?php if (($preview['invalid_sessions']??0)>0): ?><p class="alert alert-warning mt-3 mb-0"><?= (int)$preview['invalid_sessions'] ?> invalid session(s) excluded. Review attendance before generating payroll.</p><?php endif ?>
+<?php if ($preview['period_end']>=date('Y-m-d')): ?><p class="small text-secondary mt-2 mb-0">This estimate includes today. To generate payroll, select an end date before today.</p><?php endif ?>
+<?php if ($preview['pay_basis']==='MONTHLY'): ?><p class="small text-secondary mt-2 mb-0">Fixed monthly salary uses calendar-day proration. Choose Daily or Hourly for salary based on completed attendance.</p><?php endif ?>
+<div class="table-responsive mt-3"><table class="table" data-detected-attendance><caption>Detected attendance &middot; <?= $e($preview['period_start'].' to '.$preview['period_end']) ?></caption><thead><tr><th>Date / session</th><th>Scheduled shift</th><th>Time in</th><th>Time out</th><th>Counted time</th><th>Basic salary</th></tr></thead><tbody>
+<?php if (!$detected): ?><tr><td colspan="6">No attendance recorded for this period.</td></tr><?php endif ?>
+<?php foreach ($detected as $record): $counted=$preview['pay_basis']==='DAILY'?(int)$record['regular_minutes']:(int)$record['payable_minutes']; $sessionPay=$preview['pay_basis']==='MONTHLY'?null:round((float)$preview['rate']*$counted/($preview['pay_basis']==='DAILY'?480:60),2); ?>
+<tr><td><?= $e($record['attendance_date']) ?><br><?= $e($record['session_period']??'SHIFT') ?></td><td><?= !empty($record['start_time'])?$e($record['start_time'].' - '.$record['end_time']):'Flexible' ?></td><td><?= $e($record['check_in_time']??'—') ?></td><td><?= $e($record['check_out_time']??'—') ?></td><td><?= workforceDuration($counted) ?><?php if (!empty($record['check_in_time']) && empty($record['check_out_time'])): ?><br><small>Awaiting time out</small><?php endif ?></td><td><?= $sessionPay===null?'Monthly rate':$money($sessionPay) ?></td></tr>
+<?php endforeach ?></tbody></table></div><p class="small text-secondary mb-0">Scheduled attendance counts time within the assigned session. Late arrivals and early departures reduce counted time. Daily AM/PM sessions share an eight-hour cap. Session amounts are rounded for display; payroll totals round once.</p>
+<?php endif ?>

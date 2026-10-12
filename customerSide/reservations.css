@@ -1,0 +1,284 @@
+/* Scoped layout: legacy Bootstrap fallback columns must not size this form. */
+.customer-reservations-page .reservations-page {
+    padding: 40px 0 56px;
+}
+
+.customer-reservations-page .reservations-container {
+    max-width: 1080px;
+    padding: 0 24px;
+}
+
+.customer-reservations-page .reservations-header {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.customer-reservations-page .reservations-eyebrow {
+    color: #a34c36;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.customer-reservations-page .reservations-header h1 {
+    margin: 8px 0 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.customer-reservations-page .reservations-header p {
+    margin: 0;
+    font-size: .95rem;
+}
+
+.customer-reservations-page .reservation-card {
+    padding: 28px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+}
+
+.customer-reservations-page .booking-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.customer-reservations-page .booking-icon,
+.customer-reservations-page .empty-state-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #fff0e8;
+    color: #b85136;
+    font-size: 1.3rem;
+}
+
+.customer-reservations-page .section-title {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.65rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.customer-reservations-page .booking-heading p {
+    margin: 5px 0 0;
+    font-size: .83rem;
+}
+
+.customer-reservations-page .booking-icon svg,
+.customer-reservations-page .empty-state-icon svg { width: 24px; height: 24px; }
+
+.customer-reservations-page .rules-info {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    border: 1px solid #d5e6e0;
+    border-radius: 10px;
+    background: #edf5f1;
+    font-size: .8rem;
+    line-height: 1.65;
+}
+
+.customer-reservations-page .rules-info h3 {
+    margin: 0 0 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.customer-reservations-page .rules-info p { margin: 0 0 10px; }
+.customer-reservations-page .booking-facts { display: flex; flex-wrap: wrap; gap: 6px 28px; }
+.customer-reservations-page .booking-facts i { color: #487c74; }
+
+.customer-reservations-page .booking-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 20px;
+}
+
+.customer-reservations-page .booking-field { min-width: 0; }
+.customer-reservations-page .booking-requests { grid-column: span 2; }
+
+.customer-reservations-page .booking-form .form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #244950;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.customer-reservations-page .form-label i { color: #63827e; }
+.customer-reservations-page .field-optional { color: #63777a; font-size: .72rem; font-weight: 400; }
+
+.customer-reservations-page .booking-form .form-control {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+    padding: 11px 13px;
+    border: 1px solid #c6d3d3;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: .9rem;
+    line-height: 1.5;
+    color-scheme: light;
+}
+
+.customer-reservations-page .form-control::placeholder { color: #758789; opacity: 1; }
+
+.customer-reservations-page .book-table-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 18px;
+    border: 1px solid #c9533b;
+    border-radius: 8px;
+    background: #c9533b;
+    color: #fff;
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .18s ease;
+}
+
+.customer-reservations-page .book-table-btn:hover { background: #ac432d; }
+
+.customer-reservations-page .reservation-history-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.customer-reservations-page .clear-history-btn { padding: 10px 14px; font-size: .8rem; }
+.customer-reservations-page .reservations-page .btn-outline-danger {
+    padding: 8px 12px;
+    border: 1px solid #d4a7a0;
+    border-radius: 8px;
+    background: transparent;
+    color: #a04438;
+    font-family: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+.customer-reservations-page .reservations-page .btn-outline-danger:hover:not(:disabled) { background: #fcece8; }
+.customer-reservations-page .reservations-page .btn-outline-danger:disabled { opacity: .5; cursor: not-allowed; }
+.customer-reservations-page .reservations-table { box-shadow: 0 4px 18px rgba(20, 61, 74, .04); }
+.customer-reservations-page .reservations-table table { width: 100%; border-collapse: collapse; }
+.customer-reservations-page .reservations-table th { text-align: left; white-space: nowrap; }
+.customer-reservations-page .reservations-table td { font-size: .85rem; overflow-wrap: anywhere; }
+.customer-reservations-page .reservations-table td:nth-child(3) { max-width: 280px; }
+
+.customer-reservations-page .status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: .68rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.customer-reservations-page .status-confirmed { background: #dff3e9; color: #246b4b; }
+.customer-reservations-page .status-pending { background: #fff1d5; color: #865811; }
+.customer-reservations-page .status-badge.bg-secondary { background: #e6ebed !important; color: #465c64 !important; }
+.customer-reservations-page .status-badge.bg-danger { background: #fde7e5 !important; color: #993d37 !important; }
+.customer-reservations-page .mobile-reservation-cards { display: none; }
+
+.customer-reservations-page .reservation-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 26px;
+    border: 1px dashed #b8ceca;
+    border-radius: 14px;
+    background: rgba(255, 253, 248, .5);
+}
+
+.customer-reservations-page .empty-state-icon { background: #e2eeea; color: #517d74; }
+.customer-reservations-page .reservation-empty-state h2 { margin: 0 0 5px; font-size: 1rem; font-weight: 600; }
+.customer-reservations-page .reservation-empty-state p { margin: 0; font-size: .8rem; }
+
+@media (max-width: 767.98px) {
+    .customer-reservations-page .reservations-page { padding: 28px 0 40px; }
+    .customer-reservations-page .reservations-container { padding: 0 16px; }
+    .customer-reservations-page .reservation-card { padding: 22px; }
+    .customer-reservations-page .booking-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .customer-reservations-page .booking-requests { grid-column: 1 / -1; }
+    .customer-reservations-page .booking-submit { grid-column: 1 / -1; }
+    .customer-reservations-page .reservations-table { display: none; }
+    .customer-reservations-page .mobile-reservation-cards { display: block; }
+    .customer-reservations-page .mobile-res-card { padding: 18px; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 12px; background: #fffdf8; }
+    .customer-reservations-page .mobile-res-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .customer-reservations-page .mobile-res-notes { margin: 12px 0; font-size: .8rem; overflow-wrap: anywhere; }
+    .customer-reservations-page .mobile-res-card button { min-height: 44px; }
+}
+
+@media (max-width: 479.98px) {
+    .customer-reservations-page .reservation-card { padding: 18px; }
+    .customer-reservations-page .booking-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .customer-reservations-page .booking-heading { align-items: flex-start; gap: 12px; }
+    .customer-reservations-page .booking-heading p { line-height: 1.6; }
+    .customer-reservations-page .section-title { font-size: 1.4rem; }
+    .customer-reservations-page .rules-info { padding: 14px; }
+    .customer-reservations-page .booking-form .form-control { font-size: 1rem; }
+    .customer-reservations-page .reservation-empty-state { flex-direction: column; text-align: center; padding: 24px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .customer-reservations-page .book-table-btn { transition: none; }
+}
+
+.customer-reservations-page .reservation-payment-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+.customer-reservations-page .payment-qr { text-align: center; }
+.customer-reservations-page .payment-qr img {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto 14px;
+    border-radius: 14px;
+}
+.customer-reservations-page .payment-qr p,
+.customer-reservations-page .payment-help { margin: 12px 0; font-size: .78rem; line-height: 1.7; color: #526b70; }
+.customer-reservations-page .payment-details { min-width: 0; }
+.customer-reservations-page .payment-details h3 { font-size: 1rem; margin: 20px 0 12px; }
+.customer-reservations-page .payment-items { list-style: none; padding: 0; margin: 0 0 16px; }
+.customer-reservations-page .payment-items li,
+.customer-reservations-page .payment-total { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; font-size: .85rem; }
+.customer-reservations-page .payment-items li { border-bottom: 1px solid #d5e6e0; }
+.customer-reservations-page .payment-items li span { overflow-wrap: anywhere; min-width: 0; }
+.customer-reservations-page .payment-items small { display: block; margin-top: 4px; color: #526b70; }
+.customer-reservations-page .payment-items strong,
+.customer-reservations-page .payment-total strong { white-space: nowrap; }
+.customer-reservations-page .payment-deposit { padding: 16px; border-radius: 10px; background: #edf5f1; font-size: 1.05rem; color: #244950; }
+.customer-reservations-page .payment-form { margin-top: 22px; }
+.customer-reservations-page .payment-confirmation { display: flex; align-items: flex-start; gap: 10px; margin: 18px 0; font-size: .83rem; line-height: 1.6; cursor: pointer; }
+.customer-reservations-page .payment-confirmation input { margin-top: 4px; width: 18px; height: 18px; flex-shrink: 0; }
+.customer-reservations-page .payment-back { margin-top: 14px; }
+.customer-reservations-page .reservations-table td:nth-child(3),
+.customer-reservations-page .mobile-res-notes { white-space: pre-line; }
+@media (max-width: 767.98px) {
+    .customer-reservations-page .reservation-payment-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .customer-reservations-page .payment-deposit { flex-wrap: wrap; }
+}

@@ -1,0 +1,288 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Our Menu - La Elena Fishyalan</title>
+    <meta
+      name="description"
+      content="Search the full menu of La Elena Fishyalan — find your perfect dish or craft cocktail instantly."
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css?v=search-design-1" />
+    <link rel="stylesheet" href="search.css?v=sort-contrast-5" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top site-navbar"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand"
+          href="index.html"
+          aria-label="La Elena Fishyalan home"
+        >
+          <span class="brand-mark" aria-hidden="true"
+            ><i class="fas fa-utensils"></i
+          ></span>
+          <span class="brand-copy"
+            ><span class="brand-name">La Elena Fishyalan</span></span
+          >
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#menu">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#about">Our Story</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-item nav-divider" aria-hidden="true"></li>
+            <li class="nav-item nav-search-item">
+              <a class="nav-link active" aria-current="page" href="search.html"
+                ><i class="fas fa-search" aria-hidden="true"></i
+                ><span>Search</span></a
+              >
+            </li>
+            <li
+              class="nav-item nav-divider nav-divider-after-search"
+              aria-hidden="true"
+            ></li>
+            <li class="nav-item nav-auth-item" id="userAuthNav">
+              <a class="nav-link" href="auth/login.php"
+                ><i class="far fa-user" aria-hidden="true"></i
+                ><span>Sign In</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <header class="search-page-hero" id="searchHero">
+      <div class="search-hero-particles" id="searchParticles"></div>
+      <div class="container search-hero-inner">
+        <div class="hero-badge mb-3">
+          <i class="fas fa-compass me-2"></i>Menu Discovery
+        </div>
+        <h1 class="hero-title mb-2">
+          Find your next<br /><span class="hero-title-accent"
+            >favorite flavor.</span
+          >
+        </h1>
+        <p class="hero-subtitle mb-4">
+          From freshly prepared seafood to decadent desserts,<br />your table
+          starts with a search.
+        </p>
+
+        <!-- Enhanced Search Bar -->
+        <div class="search-hero-box">
+          <div class="search-hero-input-wrap">
+            <i class="fas fa-search search-hero-icon"></i>
+            <input
+              type="text"
+              id="mainSearchInput"
+              class="search-hero-input"
+              aria-label="Search food"
+              placeholder="Search"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button
+              class="search-hero-clear"
+              id="mainSearchClear"
+              aria-label="Clear search"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <!-- Recent Searches -->
+          <div
+            class="recent-searches-wrap"
+            id="recentSearchesWrap"
+            style="display: none"
+          >
+            <div class="recent-searches-label">
+              <i class="fas fa-clock me-1"></i> Recent
+            </div>
+            <div class="recent-searches-chips" id="recentSearchesChips"></div>
+            <button class="recent-clear-btn" id="clearRecentBtn">Clear</button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Search Results Section -->
+    <section class="search-results-section" id="searchResults">
+      <div class="container">
+        <!-- Results Header + Sort Bar -->
+        <div
+          class="search-results-header"
+          id="searchResultsHeader"
+        >
+          <div class="results-meta-row">
+            <div class="results-meta-left">
+              <h2 class="results-title">
+                <span id="resultsTitleLabel">All available food</span>
+                <span class="results-query-text" id="searchQuery"></span>
+              </h2>
+              <p class="results-count-text" id="searchResultsCount" role="status">Loading food menu...</p>
+            </div>
+            <div class="results-sort-wrap">
+              <label class="sort-label"
+                ><i class="fas fa-sort-amount-down me-1"></i>Sort by</label
+              >
+              <select class="sort-select d-none" id="sortSelect">
+                <option value="relevance">Relevance</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+                <option value="name">Name A–Z</option>
+              </select>
+              <div class="custom-sort-dropdown" id="customSortDropdown">
+                <div class="custom-sort-selected" id="customSortSelected">
+                  Relevance
+                </div>
+                <div class="custom-sort-options" id="customSortOptions">
+                  <div
+                    class="custom-sort-option selected"
+                    data-value="relevance"
+                  >
+                    Relevance
+                  </div>
+                  <div class="custom-sort-option" data-value="price-asc">
+                    Price: Low → High
+                  </div>
+                  <div class="custom-sort-option" data-value="price-desc">
+                    Price: High → Low
+                  </div>
+                  <div class="custom-sort-option" data-value="name">
+                    Name A–Z
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Chips -->
+          <div class="search-filters" id="searchFilters">
+            <span class="filter-chip active" data-filter="all">All Items</span>
+            <span class="filter-chip" data-filter="food">Food</span>
+          </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="search-results-grid" id="searchResultsGrid"></div>
+
+        <!-- No Results State -->
+        <div
+          class="no-results-state"
+          id="noSearchResults"
+          style="display: none"
+        >
+          <div class="no-results-icon">🍽️</div>
+          <h3 class="no-results-title">
+            No food items available
+          </h3>
+          <p class="no-results-sub">Try a different keyword.</p>
+          <div class="no-results-links mt-4">
+            <a href="index.html#menu" class="luxury-btn-outline"
+              ><i class="fas fa-utensils me-2"></i>Browse Food Menu</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-dark border-top border-secondary-subtle py-5"
+      id="contact"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <h5 class="text-primary-gold mb-3">
+              <i class="fas fa-map-marker-alt me-2"></i>Location
+            </h5>
+            <p class="mb-2">Libertad Bajo</p>
+            <p class="mb-2">Sinacaban,Mis.Occ</p>
+          </div>
+          <div class="col-md-4 mb-4 mb-md-0">
+            <h5 class="text-primary-gold mb-3">
+              <i class="fas fa-clock me-2"></i>Hours of Operation
+            </h5>
+            <p class="mb-2">8:00 PM - 09:00 PM</p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-primary-gold mb-3">
+              <i class="fas fa-phone me-2"></i>Contact
+            </h5>
+            <p class="mb-2">Phone: (+63) 997 235 7035</p>
+            <p class="mb-3">
+              Email:
+              <a
+                href="mailto:signarfermar@gmail.com"
+                class="text-primary-gold"
+                >signarfermar@gmail.com</a
+              >
+            </p>
+            <div class="social-icons mt-3">
+              <a href="https://www.instagram.com" class="text-primary-gold me-3"
+                ><i class="fab fa-instagram fa-lg"></i
+              ></a>
+              <a
+                href="https://www.facebook.com/johncine.martil.3/"
+                class="text-primary-gold me-3"
+                ><i class="fab fa-facebook fa-lg"></i
+              ></a>
+              <a href="https://x.com/" class="text-primary-gold"
+                ><i class="fab fa-twitter fa-lg"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4 pt-3 border-top border-secondary">
+          <small
+            >&copy; 2025 La Elena Fishyalan. All Rights Reserved. |
+            <a href="index.html" class="text-primary-gold">Food Menu</a> |
+            <a href="search.html" class="text-primary-gold">Search</a> |
+            <a href="#" class="text-primary-gold">Privacy Policy</a>
+          </small>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="search-page.js?v=browse-food-2"></script>
+  </body>
+</html>

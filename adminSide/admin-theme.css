@@ -1,0 +1,97 @@
+/* Shared light theme for every page in the administration area. */
+:root {
+    --admin-ink: #18333b;
+    --admin-muted: #63777a;
+    --admin-accent: #e56b4f;
+    --admin-accent-hover: #c9533b;
+    --admin-border: #dfe8e8;
+    --admin-soft: #f3f8f7;
+}
+
+body {
+    background: #ffffff !important;
+    color: var(--admin-ink) !important;
+}
+
+h1, h2, h3, h4, h5, h6, .text-gold { color: var(--admin-ink) !important; }
+
+.navbar, .navbar.bg-dark, .navbar-dark.bg-dark {
+    background: #ffffff !important;
+    border-bottom: 1px solid var(--admin-border);
+    box-shadow: 0 2px 12px rgba(20, 61, 74, .08);
+}
+.navbar .navbar-brand, .navbar .nav-link { color: var(--admin-ink) !important; }
+.navbar .navbar-toggler { border-color: var(--admin-border); }
+.navbar .navbar-toggler-icon { filter: invert(20%) sepia(20%) saturate(900%) hue-rotate(145deg); }
+
+/* Some older CRUD pages add Bootstrap's bg-dark class directly to the
+   sidebar/offcanvas. Override that utility so their navigation matches the
+   light dashboard shell. */
+.sidebar, .sidebar.bg-dark, .offcanvas-sidebar, .offcanvas-sidebar.bg-dark {
+    background: #ffffff !important;
+    border-color: var(--admin-border) !important;
+}
+.sidebar .nav-link, .offcanvas-sidebar .nav-link { color: var(--admin-muted) !important; }
+.sidebar .nav-link:hover, .sidebar .nav-link.active,
+.offcanvas-sidebar .nav-link:hover, .offcanvas-sidebar .nav-link.active {
+    background: #eef8f6 !important;
+    color: var(--admin-ink) !important;
+    border-left-color: var(--admin-accent) !important;
+}
+
+.card, .modal-content, .dropdown-menu, .feature-box, .premium-card,
+.stat-card, .action-card, .content-card {
+    background: #ffffff !important;
+    color: var(--admin-ink) !important;
+    border-color: var(--admin-border) !important;
+    box-shadow: 0 4px 16px rgba(20, 61, 74, .06);
+}
+.card-header, .modal-header, .modal-footer { background: var(--admin-soft) !important; border-color: var(--admin-border) !important; }
+.card-body { background: transparent !important; }
+.alert-info { background: #e6f7f7 !important; color: var(--admin-ink) !important; border-color: #b9e4e2 !important; }
+
+.table, .table-dark {
+    --bs-table-bg: #ffffff;
+    --bs-table-color: var(--admin-ink);
+    --bs-table-border-color: var(--admin-border);
+    --bs-table-striped-bg: #f9fbfb;
+    --bs-table-hover-bg: #eef8f6;
+    --bs-table-hover-color: var(--admin-ink);
+    background: #ffffff !important;
+    color: var(--admin-ink) !important;
+}
+.table th, .table-dark th { background: var(--admin-soft) !important; color: var(--admin-ink) !important; border-color: var(--admin-border) !important; }
+.table td, .table-dark td { color: var(--admin-ink) !important; border-color: var(--admin-border) !important; }
+
+.form-control, .form-select, textarea,
+input[type="text"], input[type="email"], input[type="password"], input[type="number"],
+input[type="date"], input[type="time"], input[type="search"], input[type="tel"], input[type="url"] {
+    background-color: #ffffff !important;
+    color: var(--admin-ink) !important;
+    border-color: #cbdada !important;
+}
+.form-control:focus, .form-select:focus, textarea:focus,
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus,
+input[type="number"]:focus, input[type="date"]:focus, input[type="time"]:focus,
+input[type="search"]:focus, input[type="tel"]:focus, input[type="url"]:focus {
+    background-color: #ffffff !important;
+    color: var(--admin-ink) !important;
+    border-color: var(--admin-accent) !important;
+    box-shadow: 0 0 0 .2rem rgba(229, 107, 79, .15) !important;
+}
+
+.btn-gold, .btn-primary, .btn-success, .bg-gold {
+    background-color: var(--admin-accent) !important;
+    border-color: var(--admin-accent) !important;
+    color: #ffffff !important;
+}
+.btn-gold:hover, .btn-primary:hover, .btn-success:hover {
+    background-color: var(--admin-accent-hover) !important;
+    border-color: var(--admin-accent-hover) !important;
+}
+.btn-outline-gold { color: var(--admin-accent) !important; border-color: var(--admin-accent) !important; }
+.btn-outline-gold:hover { background: var(--admin-accent) !important; color: #ffffff !important; }
+
+.pagination .page-link { background: #ffffff; color: var(--admin-ink); border-color: var(--admin-border); }
+.pagination .page-item.active .page-link { background: var(--admin-accent); border-color: var(--admin-accent); color: #ffffff; }
+.text-muted, small { color: var(--admin-muted) !important; }

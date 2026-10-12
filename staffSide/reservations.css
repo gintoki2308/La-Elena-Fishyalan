@@ -1,0 +1,84 @@
+/* Reservations use the shared staff palette and responsive sidebar. */
+.reservations-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.reservations-header h1 {
+    margin: 0 0 .5rem;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.reservations-header p { font-size: .9rem; }
+.reservation-count {
+    padding: .5rem .85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background: #e9f4f1;
+    color: #36565d;
+    font-size: .8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.reservation-empty {
+    align-items: center;
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+}
+.reservation-empty > i {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 1.25rem;
+    border-radius: 50%;
+    background: #e9f4f1;
+    color: #5daeb1;
+    font-size: 2rem;
+}
+.reservation-empty h2 { font-size: 1.15rem; font-weight: 600; }
+.reservation-empty p { max-width: 420px; font-size: .9rem; }
+
+.reservation-table-card { overflow: hidden; }
+.reservation-table-card .table-responsive { border: 0; border-radius: 0; }
+.reservation-table-card table { min-width: 850px; }
+.reservation-table-card th { font-size: .8rem; white-space: nowrap; }
+.reservation-table-card td { font-size: .85rem; }
+.reservation-table-card .form-select { min-width: 145px; }
+.reservation-notes { max-width: 220px; overflow-wrap: anywhere; }
+
+.res-card {
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-wrap: anywhere;
+}
+.res-card-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: .75rem; margin-bottom: 1rem; }
+.res-card-header > div { min-width: 0; flex: 1 1 120px; }
+.res-id { color: var(--gold); font-size: .8rem; font-weight: 700; margin-bottom: .25rem; }
+.res-customer-name { font-size: .95rem; font-weight: 600; }
+.res-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-bottom: 1rem; font-size: .85rem; }
+.res-meta-item { display: flex; flex-direction: column; gap: .2rem; }
+.res-meta-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; }
+.res-meta-value { font-weight: 500; }
+.res-notes { border-left: 3px solid; border-radius: 0 6px 6px 0; padding: .65rem .75rem; font-size: .85rem; margin-bottom: 1rem; }
+.res-update-form { display: flex; align-items: center; gap: .5rem; }
+.res-update-form select { flex: 1; min-width: 0; }
+.res-update-form button { min-height: 42px; white-space: nowrap; }
+.desktop-table { display: block; }
+.mobile-cards { display: none; }
+.reservations-page .bottom-nav { display: none; }
+
+@media (max-width: 767px) {
+    .desktop-table { display: none; }
+    .mobile-cards { display: block; }
+    .reservation-empty { padding: 2.5rem 1rem; }
+}

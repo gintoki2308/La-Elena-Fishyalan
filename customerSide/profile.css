@@ -1,0 +1,84 @@
+.customer-profile-page .profile-container {
+    max-width: 1120px;
+    padding-top: clamp(24px, 4vw, 44px);
+}
+.profile-back { color: #526e73; font-size: .82rem; text-decoration: none; }
+.profile-back:hover { color: #143d4a; }
+.profile-page-heading { margin: 20px 0 24px; }
+.profile-page-heading h1 { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 600; margin-bottom: 6px; }
+.profile-page-heading p { font-size: .9rem; margin: 0; }
+.customer-profile-page .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: clamp(24px, 4vw, 36px);
+    margin-bottom: 24px !important;
+    border: 1px solid #cfdfd9;
+    border-radius: 18px;
+    background: linear-gradient(115deg, #fffdf8 15%, #e2f1ec 100%);
+    box-shadow: 0 8px 24px rgba(20, 61, 74, .05);
+}
+.customer-profile-page .avatar-wrap {
+    position: relative;
+    flex: 0 0 104px;
+    width: 104px;
+    height: 104px;
+    padding: 0;
+    border: 4px solid #fffdf8;
+    border-radius: 50%;
+    background: #dcece6;
+    box-shadow: 0 0 0 1px #b8d3ca;
+    cursor: pointer;
+}
+.avatar-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.avatar-overlay {
+    position: absolute; right: -3px; bottom: -3px;
+    display: grid; place-items: center;
+    width: 32px; height: 32px;
+    background: #143d4a; color: #fff;
+    border: 3px solid #fffdf8; border-radius: 50%;
+    font-size: .75rem;
+}
+.avatar-wrap:hover .avatar-overlay { background: #c9533b; }
+.profile-identity { flex: 1; min-width: 0; }
+.profile-eyebrow { display: block; color: #526e73; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 7px; }
+.customer-profile-page .profile-name { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 600; letter-spacing: -.04em; overflow-wrap: anywhere; margin: 0 0 5px; }
+.profile-username { font-size: .9rem; margin-bottom: 10px; overflow-wrap: anywhere; }
+.profile-member { display: inline-flex; gap: 7px; align-items: center; font-size: .75rem; color: #42685b; }
+.profile-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.profile-actions .btn { padding: 11px 22px; font-size: .85rem; white-space: nowrap; }
+.profile-settings { font-size: .78rem; color: #526e73; text-decoration: none; }
+.profile-settings:hover { color: #143d4a; text-decoration: underline; }
+.customer-profile-page .premium-card { padding: clamp(20px, 3vw, 28px); border: 1px solid var(--border); height: 100%; }
+.customer-profile-page .premium-card h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; }
+.customer-profile-page .premium-card h4 > i { display: inline-grid; place-items: center; width: 34px; height: 34px; background: #e8f2ee; border-radius: 10px; font-size: .9rem; }
+.customer-profile-page .border-secondary { border-color: #dbe5df !important; }
+.customer-profile-page .info-label { color: #63777a; font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+.customer-profile-page .info-value { color: #284e57; font-size: .9rem; font-weight: 500; margin-bottom: 22px; overflow-wrap: anywhere; }
+.customer-profile-page .info-value.text-info { color: #284e57 !important; }
+.profile-address { margin: 12px 0 0; }
+.profile-address > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 16px; padding: 7px 0; }
+.profile-address dt { color: #63777a; font-size: .78rem; font-weight: 400; }
+.profile-address dd { color: #284e57; font-size: .85rem; margin: 0; overflow-wrap: anywhere; }
+.profile-bio { font-size: .9rem; line-height: 1.8; overflow-wrap: anywhere; }
+.profile-bio-empty { background: #f0f6f2; border: 1px dashed #cbded5; border-radius: 12px; padding: 28px 16px; text-align: center; margin-bottom: 24px; }
+.profile-bio-empty > i { display: block; color: #638b7d; font-size: 1.25rem; margin-bottom: 12px; }
+.profile-bio-empty p { font-size: .88rem; margin: 0 0 5px; }
+.profile-bio-empty span { font-size: .76rem; color: #63777a; }
+.profile-personal-details > div { padding-top: 10px; padding-bottom: 10px; }
+.customer-profile-page .alert { border-radius: 12px; font-size: .85rem; box-shadow: none !important; }
+.customer-profile-page .btn-close { filter: none; }
+.customer-profile-page .modal-content { color: #36565d; }
+.customer-profile-page .modal-title { font-size: 1.05rem; font-weight: 600; }
+.customer-profile-page .form-label { font-size: .72rem; font-weight: 600; }
+.customer-profile-page .form-control, .customer-profile-page .form-select { font-size: .88rem; padding: .65rem .8rem; }
+.customer-profile-page .form-control::placeholder { color: #748587; }
+#editProfileModal form { display: flex; flex-direction: column; overflow: hidden; flex: 1; min-height: 0; }
+@media (max-width: 575.98px) {
+    .customer-profile-page .profile-container { padding-left: 16px; padding-right: 16px; }
+    .customer-profile-page .profile-header { flex-wrap: wrap; gap: 18px; padding: 22px !important; }
+    .customer-profile-page .avatar-wrap { flex-basis: 76px; width: 76px; height: 76px; }
+    .profile-actions { width: 100%; align-items: stretch; text-align: center; padding-top: 4px; }
+    .profile-identity { flex-basis: calc(100% - 94px); }
+    .customer-profile-page .modal-body { padding: 20px !important; }
+}
